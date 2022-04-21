@@ -13,4 +13,4 @@ E ações de administrador, sendo:
  - Visualização de todas as vendas, podendo atualizar seus status de "Pendente" para "Confirmada".
 
 #### Obs: não esquecer de executar "composer install" na raíz do projeto e modificar o ".env.example" antes do "php artisan serve".
-#### Em caso de um "No application encryption key has been specified." exception, apenas clicar na solução fornecida pelo Laravel.
+#### Em caso de um "No application encryption key has been specified." exception, apenas clique na solução fornecida pelo Laravel.
