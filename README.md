@@ -11,3 +11,6 @@ E ações de administrador, sendo:
  - Visualização das contas registradas e itens no sistema;
  - Formulário para adição de novos itens; <br>
  - Visualização de todas as vendas, podendo atualizar seus status de "Pendente" para "Confirmada".
+
+#### Obs: não esquecer de executar "composer install" na raíz do projeto e modificar o ".env.example" antes do "php artisan serve".
+#### Em caso de um "No application encryption key has been specified." exception, apenas clicar na solução fornecida pelo Laravel.
