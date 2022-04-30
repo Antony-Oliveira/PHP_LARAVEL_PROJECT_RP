@@ -12,5 +12,9 @@ E ações de administrador, sendo:
  - Formulário para adição de novos itens; <br>
  - Visualização de todas as vendas, podendo atualizar seus status de "Pendente" para "Confirmada".
 
-#### Obs: não esquecer de executar "composer install" na raíz do projeto e modificar o ".env.example" antes do "php artisan serve".
-#### Em caso de um "No application encryption key has been specified." exception, apenas clique na solução fornecida pelo Laravel.
+### Instruções
+- Modifique o arquivo ".env.example" de acordo com as configurações do banco de sua máquina, e em seguida, renomeie para apenas ".env";
+- Execute "composer install" na raíz do projeto, para instalar as dependencias php;
+- Use "php artisan migrate" para adicionar as tabelas necessárias para o funcionamento do projeto;
+- Use "php artisan db:seed" para popular algumas tabelas automáticamente, para uma visualização melhor do projeto;
+- Por fim, execute "php artisan key:generate".
