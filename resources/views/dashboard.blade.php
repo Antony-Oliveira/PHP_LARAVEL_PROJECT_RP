@@ -5,7 +5,7 @@
 @section('content')
 
 @if(count($sales) == 0)
-<p>Você ainda não solicitou compras! Veja a <a href="/">Lista de itens</a> </p>
+<p class="msg">Voce não solicitou itens ainda! <a href="/">Veja a lista de itens</a></p>
 @else
 
 <div name="userDashboard">

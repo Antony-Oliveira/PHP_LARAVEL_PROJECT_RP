@@ -10,62 +10,63 @@ use App\Models\User;
 
 class RpController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $user = auth()->user();
-        if (isset($user->id) AND $user->id == 1 AND $user->current_team_id != 1) {
+        if (isset($user->id) and $user->id == 1 and $user->current_team_id != 1) {
             $user->current_team_id = 1;
             $user->save();
-        }else{
-        
-        $items = Item::all();        
-        return view('welcome',['items' => $items, 'user' => $user]);
+        } else {
+            $items = Item::all();
+            return view('welcome', ['items' => $items, 'user' => $user]);
         }
     }
-    
-    public function addItem(Request $request){
-    
+
+    public function addItem(Request $request)
+    {
+
         $user = auth()->user();
         if ($user->current_team_id != 1) {
             return redirect('/')->with('msg', 'Rota não acessivel');
-        }else {
-        
-        $item = new Item();
-        
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
+        } else {
 
-            $requestImage = $request->image;
+            $item = new Item();
 
-            $extension = $requestImage->extension();
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
 
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+                $requestImage = $request->image;
 
-            $requestImage->move(public_path('img/itens'), $imageName);
+                $extension = $requestImage->extension();
 
-            $item->image = $imageName;
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
 
+                $requestImage->move(public_path('img/itens'), $imageName);
+
+                $item->image = $imageName;
+            }
+
+            $item->item_nome = $request->item_nome;
+            $item->item_valor = $request->item_valor;
+            $item->type = $request->type;
+            $item->save();
+
+            return redirect('/admin')->with('msg', 'Item adicionado com sucesso!');
         }
-
-        $item->item_nome = $request->item_nome;
-        $item->item_valor = $request->item_valor;
-        $item->type = $request->type;
-        $item->save();
-
-        return redirect('/admin')->with('msg', 'Item adicionado com sucesso!');
-}
-
     }
-    public function itemShow($id){
-        
+    public function itemShow($id)
+    {
+
         $server = Server::all();
         $item = Item::findOrFail($id);
         return view('item.show', ['item' => $item, 'servers' => $server]);
     }
 
-    public function sale(Request $request){
-        
+    public function sale(Request $request)
+    {
+
         $user = auth()->user();
-        
+
         $server = new Sale();
         $item = Item::findOrFail($request->item_id);
         $server = Server::findOrFail($request->server_id);
@@ -84,7 +85,8 @@ class RpController extends Controller
         //
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $user = auth()->user();
         $sale = Sale::where([
             ['user_id', '=', $user->id]
@@ -92,11 +94,12 @@ class RpController extends Controller
         return view('dashboard', ['sales' => $sale]);
     }
 
-    public function adminInfo(){
+    public function adminInfo()
+    {
         $user = auth()->user();
-        if($user->current_team_id != 1){
+        if ($user->current_team_id != 1) {
             return redirect('/')->with('msg', 'Rota não acessivel.');
-        }else{
+        } else {
             $users = User::all();
             $items = Item::all();
             $sales = Sale::all();
@@ -105,20 +108,22 @@ class RpController extends Controller
         }
     }
 
-    public function add(){
+    public function add()
+    {
         $user = auth()->user();
-        if ($user->current_team_id != 1){
+        if ($user->current_team_id != 1) {
             return redirect('/')->with('msg', 'Rota não acessivel');
-        }else{
-        return view('admin.add');
+        } else {
+            return view('admin.add');
         }
     }
 
-    public function approve($id){
+    public function approve($id)
+    {
         $user = auth()->user();
-        if ($user->current_team_id != 1){
+        if ($user->current_team_id != 1) {
             return redirect('/')->with('msg', 'Rota não acessivel');
-        }else{
+        } else {
             $sale = Sale::findOrFail($id);
             $sale->was_approved = "Aprovada";
             $sale->save();

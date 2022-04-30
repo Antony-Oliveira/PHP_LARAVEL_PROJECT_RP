@@ -4,8 +4,8 @@
 
 @section('content')
 
-<div class="container" class="bg-dark bg-gradient">
-
+<div class="container">
+<div class="row m-3">
 <h3>Vendas</h3>
     <table class="table table-striped table-bordered">
         
@@ -71,8 +71,11 @@
             @endforeach
         </tbody>
     </table>
-    <button style="margin-top: 10px; margin-bottom: 20px" onclick="window.location = '/admin/addItem'" class="btn btn-primary">Adicionar item</button>
-
+    <div>
+    <a class="btn btn-outline-primary" href="/admin/addItem">Adicionar item</a>
+    </div>
+</div>
+</div>
     
 
 @endsection

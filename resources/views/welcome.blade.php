@@ -3,9 +3,11 @@
 @section('title', 'Tela inicial')
 
 @section('content')
-
-<div id="items-container" class="col-md-12">
-    <div id="cards-container" class="row">
+@if(count($items) == 0)
+<p class="msg">No momento não há itens no catalogo...</p>
+@endif
+<div id="items-container" class="col-md-12 ">
+    <div id="cards-container" class="row p-md-2">
         @foreach($items as $item)
         <div class="card col-md-3">
             <img src="/img/itens/{{ $item->image }}" class="img-fluid" alt="{{$item->item_nome}}">
@@ -24,7 +26,9 @@
 
 @if(isset($user))
 @if($user->current_team_id == 1)
-<a href="/admin">Aba administrativa</a>
+<div class="fluid">
+    <a href="/admin" class="btn btn-outline-dark" tabindex="-1" role="button">Aba administrativa</a>
+</div>
 @endif
 @endif
 @endsection

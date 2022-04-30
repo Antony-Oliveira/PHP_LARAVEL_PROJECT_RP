@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="col-md-6 offset-md-3">
+  <div class="m-4">
   <h1>Criação de itens</h1>
   <form id="addItemForm" action="/admin/add" method="POST" enctype="multipart/form-data">
     @csrf
@@ -39,7 +40,7 @@
   <script src="/js/notify.min.js"></script>
 
   <script src="/js/script.js"></script>
-
+</div>
 </div>
 
 @endsection
